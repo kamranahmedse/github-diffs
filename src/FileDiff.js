@@ -2,9 +2,13 @@ class FileDiff {
 
   constructor() {
     this.bindHeaders();
-    FileDiff.addToolBarItems();
 
+    FileDiff.addToolBarItems();
     FileDiff.toggleFileDetails = FileDiff.toggleFileDetails.bind(this);
+
+    if (localStorage.getItem('gh-collapse:state') === 'collapsed') {
+      FileDiff.hideAllBodies();
+    }
   }
 
   /**
@@ -80,6 +84,8 @@ class FileDiff {
       item.classList.remove('Details-content--shown');
       item.classList += ' Details-content--hidden';
     });
+
+    localStorage.setItem('gh-collapse:state', 'collapsed');
   }
 
   /**
@@ -90,6 +96,8 @@ class FileDiff {
       item.classList.remove('Details-content--hidden');
       item.classList += ' Details-content--shown';
     });
+
+    localStorage.setItem('gh-collapse:state', 'expanded');
   }
 }
 
