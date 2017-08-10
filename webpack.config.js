@@ -1,17 +1,22 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    FileDiff: './src/FileDiff.js'
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
+        loader: "babel-loader",
         exclude: /node_modules/,
-        loader: "babel-loader"
+        query: {
+          presets: ['es2017']
+        }
       }
     ]
   }
