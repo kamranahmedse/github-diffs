@@ -10,6 +10,10 @@
     "babel-register": "^6.24.1",
     "webpack": "^3.5.3"
   },
+  "scripts": {
+    "start": "webpack -d --watch",
+    "build": "webpack -p"
+  },
   "author": "Kamran Ahmed <kamranahmed.se@gmail.com>",
   "license": "MIT"
 }
