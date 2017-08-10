@@ -4,9 +4,11 @@
   "description": "Collapse/expand diffs in github pull requests for easier review",
   "dependencies": {},
   "devDependencies": {
+    "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-es2017": "^6.24.1",
-    "babel-register": "^6.24.1"
+    "babel-register": "^6.24.1",
+    "webpack": "^3.5.3"
   },
   "author": "Kamran Ahmed <kamranahmed.se@gmail.com>",
   "license": "MIT"
