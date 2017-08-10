@@ -80,8 +80,11 @@ class FileDiff {
 
   /**
    * Hides all the visible diff file bodies
+   * @param event
    */
-  static hideAllBodies() {
+  static hideAllBodies(event) {
+    event.preventDefault();
+
     document.querySelectorAll(`.${Constants.DETAIL_SHOWN_CLASS}`).forEach(function (item) {
       item.classList.remove(Constants.DETAIL_SHOWN_CLASS);
       item.classList += ` ${Constants.DETAIL_HIDDEN_CLASS}`;
@@ -92,8 +95,11 @@ class FileDiff {
 
   /**
    * Shows all the hidden diff file bodies
+   * @param event
    */
-  static showAllBodies() {
+  static showAllBodies(event) {
+    event.preventDefault();
+
     document.querySelectorAll(`.${Constants.DETAIL_HIDDEN_CLASS}`).forEach(function (item) {
       item.classList.remove(Constants.DETAIL_HIDDEN_CLASS);
       item.classList += ` ${Constants.DETAIL_SHOWN_CLASS}`;
