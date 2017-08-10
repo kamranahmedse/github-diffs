@@ -1,3 +1,5 @@
+import Constants from "./Constants";
+
 class FileDiff {
 
   constructor() {
@@ -6,7 +8,7 @@ class FileDiff {
     FileDiff.addToolBarItems();
     FileDiff.toggleFileDetails = FileDiff.toggleFileDetails.bind(this);
 
-    if (localStorage.getItem('gh-collapse:state') === 'collapsed') {
+    if (localStorage.getItem(Constants.STORAGE_KEY) === Constants.STATE_COLLAPSED) {
       FileDiff.hideAllBodies();
     }
   }
@@ -16,7 +18,7 @@ class FileDiff {
    * file details show/hide upon click
    */
   bindHeaders() {
-    document.querySelectorAll('.file-header').forEach(item => {
+    document.querySelectorAll(`.${Constants.FILE_HEADER_CLASS}`).forEach(item => {
       item.addEventListener('click', FileDiff.toggleFileDetails);
     });
   }
@@ -32,8 +34,8 @@ class FileDiff {
       return;
     }
 
-    header.nextElementSibling.classList.toggle('Details-content--shown');
-    header.nextElementSibling.classList.toggle('Details-content--hidden');
+    header.nextElementSibling.classList.toggle(Constants.DETAIL_SHOWN_CLASS);
+    header.nextElementSibling.classList.toggle(Constants.DETAIL_HIDDEN_CLASS);
   }
 
   /**
@@ -42,8 +44,8 @@ class FileDiff {
    * @returns {*}
    */
   static getHeaderElement(event) {
-    let isSelf = event.target.classList.contains('file-header'),
-      isParent = event.target.parentElement.classList.contains('file-header');
+    let isSelf = event.target.classList.contains(Constants.FILE_HEADER_CLASS),
+      isParent = event.target.parentElement.classList.contains(Constants.FILE_HEADER_CLASS);
 
     if (isSelf) {
       return event.target;
@@ -66,38 +68,38 @@ class FileDiff {
     }
 
     let btnGroup = '<div class="BtnGroup rvt-tools">' +
-      '<a id="rvt-collapse-file-content" class="btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s" href="#" aria-label="Collapse All">Collapse All Files</a>' +
-      '<a id="rvt-expand-file-content" class="btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s" href="#" aria-label="Show All">Show All Files</a>' +
+      `<a id="${Constants.COLLAPSE_ALL_BUTTON_ID}" class="${Constants.TOOL_BUTTON_CLASS}" href="#" aria-label="Collapse All">Collapse All Files</a>` +
+      `<a id="${Constants.SHOW_ALL_BUTTON_ID}" class="${Constants.TOOL_BUTTON_CLASS}" href="#" aria-label="Show All">Show All Files</a>` +
       '</div>';
 
-    document.querySelector('.pr-review-tools .diffbar-item').insertAdjacentHTML('afterBegin', btnGroup);
+    document.querySelector(Constants.DIFF_BAR_SELECTOR).insertAdjacentHTML('afterBegin', btnGroup);
 
-    document.getElementById('rvt-collapse-file-content').addEventListener('click', FileDiff.hideAllBodies);
-    document.getElementById('rvt-expand-file-content').addEventListener('click', FileDiff.showAllBodies);
+    document.getElementById(Constants.COLLAPSE_ALL_BUTTON_ID).addEventListener('click', FileDiff.hideAllBodies);
+    document.getElementById(Constants.SHOW_ALL_BUTTON_ID).addEventListener('click', FileDiff.showAllBodies);
   }
 
   /**
    * Hides all the visible diff file bodies
    */
   static hideAllBodies() {
-    document.querySelectorAll('.Details-content--shown').forEach(function (item) {
-      item.classList.remove('Details-content--shown');
-      item.classList += ' Details-content--hidden';
+    document.querySelectorAll(`.${Constants.DETAIL_SHOWN_CLASS}`).forEach(function (item) {
+      item.classList.remove(Constants.DETAIL_SHOWN_CLASS);
+      item.classList += ` ${Constants.DETAIL_HIDDEN_CLASS}`;
     });
 
-    localStorage.setItem('gh-collapse:state', 'collapsed');
+    localStorage.setItem(Constants.STORAGE_KEY, Constants.STATE_COLLAPSED);
   }
 
   /**
    * Shows all the hidden diff file bodies
    */
   static showAllBodies() {
-    document.querySelectorAll('.Details-content--hidden').forEach(function (item) {
-      item.classList.remove('Details-content--hidden');
-      item.classList += ' Details-content--shown';
+    document.querySelectorAll(`.${Constants.DETAIL_HIDDEN_CLASS}`).forEach(function (item) {
+      item.classList.remove(Constants.DETAIL_HIDDEN_CLASS);
+      item.classList += ` ${Constants.DETAIL_SHOWN_CLASS}`;
     });
 
-    localStorage.setItem('gh-collapse:state', 'expanded');
+    localStorage.setItem(Constants.STORAGE_KEY, Constants.STATE_EXPANDED);
   }
 }
 
