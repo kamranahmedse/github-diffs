@@ -2,6 +2,7 @@ class FileDiff {
 
   constructor() {
     this.bindHeaders();
+    FileDiff.addToolBarItems();
 
     FileDiff.toggleFileDetails = FileDiff.toggleFileDetails.bind(this);
   }
@@ -50,7 +51,47 @@ class FileDiff {
 
     return null;
   }
+
+  /**
+   * Adds toolbar buttons (show/hide diffs)
+   */
+  static addToolBarItems() {
+    // Ignore if the buttons are already there
+    if (document.getElementsByClassName('rvt-tools').length !== 0) {
+      return;
+    }
+
+    let btnGroup = '<div class="BtnGroup rvt-tools">' +
+      '<a id="rvt-collapse-file-content" class="btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s" href="#" aria-label="Collapse All">Collapse All Files</a>' +
+      '<a id="rvt-expand-file-content" class="btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s" href="#" aria-label="Show All">Show All Files</a>' +
+      '</div>';
+
+    document.querySelector('.pr-review-tools .diffbar-item').insertAdjacentHTML('afterBegin', btnGroup);
+
+    document.getElementById('rvt-collapse-file-content').addEventListener('click', FileDiff.hideAllBodies);
+    document.getElementById('rvt-expand-file-content').addEventListener('click', FileDiff.showAllBodies);
+  }
+
+  /**
+   * Hides all the visible diff file bodies
+   */
+  static hideAllBodies() {
+    document.querySelectorAll('.Details-content--shown').forEach(function (item) {
+      item.classList.remove('Details-content--shown');
+      item.classList += ' Details-content--hidden';
+    });
+  }
+
+  /**
+   * Shows all the hidden diff file bodies
+   */
+  static showAllBodies() {
+    document.querySelectorAll('.Details-content--hidden').forEach(function (item) {
+      item.classList.remove('Details-content--hidden');
+      item.classList += ' Details-content--shown';
+    });
+  }
 }
 
-
 new FileDiff();
+
