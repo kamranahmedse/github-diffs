@@ -38,9 +38,7 @@ class FileDiff {
     let preferredState = localStorage.getItem(Constants.STORAGE_KEY);
 
     // Restore the last known state
-    if (preferredState === Constants.STATE_EXPANDED) {
-      this.showAllBodies();
-    } else {
+    if (preferredState === Constants.STATE_COLLAPSED) {
       this.hideAllBodies();
     }
   }
