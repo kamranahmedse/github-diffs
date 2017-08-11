@@ -9,5 +9,6 @@ export default {
   SHOW_ALL_BUTTON_ID: 'rvt-expand-file-content',
   TOOL_BUTTON_CLASS: 'btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s',
   DIFF_BAR_SELECTOR: '.pr-review-tools .diffbar-item',
-  DIFF_BODY_SELECTOR: 'js-diff-progressive-container'
+  DIFF_BODY_SELECTOR: 'js-diff-progressive-container',
+  GH_COLLAPSE_BUTTON_SELECTOR: '[aria-label="Toggle diff text"]'
 };

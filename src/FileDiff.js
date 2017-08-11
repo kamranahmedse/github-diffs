@@ -7,17 +7,32 @@ class FileDiff {
   }
 
   initialize() {
-    if (!fileDiff.canLoadExtension()) {
+    if (!this.canLoadExtension()) {
       return false;
     }
 
-    fileDiff.bindHeaders();
-    fileDiff.addToolBarItems();
-    fileDiff.applyPreferences();
+    this.bindHeaders();
+    this.removeDefaultCollapseButtons();
+    this.addToolBarItems();
+    this.applyPreferences();
 
     return true;
   }
 
+  /**
+   * Github also has default collapse buttons but with inconsistent behavior
+   * Issue: https://github.com/kamranahmedse/github-diffs/issues/1
+   */
+  removeDefaultCollapseButtons() {
+    // Remove the default Github buttons
+    document.querySelectorAll(Constants.GH_COLLAPSE_BUTTON_SELECTOR).forEach(function (item) {
+      item.parentElement.removeChild(item);
+    });
+  }
+
+  /**
+   * Applies the last stored state for the diffs
+   */
   applyPreferences() {
 
     let preferredState = localStorage.getItem(Constants.STORAGE_KEY);
@@ -122,6 +137,8 @@ class FileDiff {
    * @param event
    */
   showAllBodies(event) {
+    event && event.preventDefault();
+
     event.preventDefault();
 
     document.querySelectorAll(`.${Constants.DETAIL_HIDDEN_CLASS}`).forEach(function (item) {
