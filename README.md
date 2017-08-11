@@ -43,6 +43,10 @@ chrome://extensions
 Now click `Load unpacked extension..` and select the `build` directory. This will load the extension and any changes that you will make, will be reflected automatically.
 
 ## Contribution
+
+- Extend functionality by improving the diffs in any way
+- Features Suggestions
+
 I'd love to hear what you have to say. Reach me out at kamranahmed.se@gmail.com or [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamranahmedse.svg?style=social&label=Follow%20%40kamranahmedse)](https://twitter.com/kamranahmedse)
 
 ## License
