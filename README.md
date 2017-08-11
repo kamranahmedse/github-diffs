@@ -1,4 +1,4 @@
-# ➕➖ github-diffs
+# github-diffs ➕➖
 
 > Collapse or expand diffs in pull requests for easier code review
 
