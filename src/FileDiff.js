@@ -19,8 +19,13 @@ class FileDiff {
   }
 
   applyPreferences() {
+
+    let preferredState = localStorage.getItem(Constants.STORAGE_KEY);
+
     // Restore the last known state
-    if (localStorage.getItem(Constants.STORAGE_KEY) === Constants.STATE_COLLAPSED) {
+    if (preferredState === Constants.STATE_EXPANDED) {
+      this.showAllBodies();
+    } else {
       this.hideAllBodies();
     }
   }
@@ -86,10 +91,10 @@ class FileDiff {
       return;
     }
 
-    let btnGroup = '<div class="BtnGroup rvt-tools">' +
-      `<a id="${Constants.COLLAPSE_ALL_BUTTON_ID}" class="${Constants.TOOL_BUTTON_CLASS}" href="#" aria-label="Collapse All">Collapse All Files</a>` +
-      `<a id="${Constants.SHOW_ALL_BUTTON_ID}" class="${Constants.TOOL_BUTTON_CLASS}" href="#" aria-label="Show All">Show All Files</a>` +
-      '</div>';
+    let btnGroup = `<div class="BtnGroup rvt-tools">
+        <a id="${Constants.SHOW_ALL_BUTTON_ID}" class="${Constants.TOOL_BUTTON_CLASS}" href="#" aria-label="Show All">Show All Files</a>
+        <a id="${Constants.COLLAPSE_ALL_BUTTON_ID}" class="${Constants.TOOL_BUTTON_CLASS}" href="#" aria-label="Collapse All">Collapse All Files</a>
+      </div>`;
 
     document.querySelector(Constants.DIFF_BAR_SELECTOR).insertAdjacentHTML('afterBegin', btnGroup);
 
