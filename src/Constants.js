@@ -8,5 +8,6 @@ export default {
   COLLAPSE_ALL_BUTTON_ID: 'rvt-collapse-file-content',
   SHOW_ALL_BUTTON_ID: 'rvt-expand-file-content',
   TOOL_BUTTON_CLASS: 'btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s',
-  DIFF_BAR_SELECTOR: '.pr-review-tools .diffbar-item'
+  DIFF_BAR_SELECTOR: '.pr-review-tools .diffbar-item',
+  DIFF_BODY_SELECTOR: 'js-diff-progressive-container'
 };

@@ -3,14 +3,25 @@ import Constants from "./Constants";
 class FileDiff {
 
   constructor() {
-    this.bindHeaders();
+    this.toggleFileDetails = this.toggleFileDetails.bind(this);
+  }
 
-    FileDiff.addToolBarItems();
-    FileDiff.toggleFileDetails = FileDiff.toggleFileDetails.bind(this);
+  initialize() {
+    if (!fileDiff.canLoadExtension()) {
+      return false;
+    }
 
+    fileDiff.bindHeaders();
+    fileDiff.addToolBarItems();
+    fileDiff.applyPreferences();
+
+    return true;
+  }
+
+  applyPreferences() {
     // Restore the last known state
     if (localStorage.getItem(Constants.STORAGE_KEY) === Constants.STATE_COLLAPSED) {
-      FileDiff.hideAllBodies();
+      this.hideAllBodies();
     }
   }
 
@@ -20,7 +31,7 @@ class FileDiff {
    */
   bindHeaders() {
     document.querySelectorAll(`.${Constants.FILE_HEADER_CLASS}`).forEach(item => {
-      item.addEventListener('click', FileDiff.toggleFileDetails);
+      item.addEventListener('click', this.toggleFileDetails);
     });
   }
 
@@ -28,8 +39,8 @@ class FileDiff {
    * Toggles file details for the clicked file element
    * @param event
    */
-  static toggleFileDetails(event) {
-    let header = FileDiff.getHeaderElement(event);
+  toggleFileDetails(event) {
+    let header = this.getHeaderElement(event);
 
     if (!header) {
       return;
@@ -44,7 +55,7 @@ class FileDiff {
    * @param event
    * @returns {*}
    */
-  static getHeaderElement(event) {
+  getHeaderElement(event) {
     let isSelf = event.target.classList.contains(Constants.FILE_HEADER_CLASS),
       isParent = event.target.parentElement.classList.contains(Constants.FILE_HEADER_CLASS);
 
@@ -59,10 +70,17 @@ class FileDiff {
     return null;
   }
 
+  canLoadExtension() {
+    let isAlreadyLoaded = document.getElementsByClassName('rvt-tools').length !== 0,
+      isDiffPage = document.getElementsByClassName(Constants.DIFF_BODY_SELECTOR).length !== 0;
+
+    return !isAlreadyLoaded && isDiffPage;
+  }
+
   /**
    * Adds toolbar buttons (show/hide diffs)
    */
-  static addToolBarItems() {
+  addToolBarItems() {
     // Ignore if the buttons are already there
     if (document.getElementsByClassName('rvt-tools').length !== 0) {
       return;
@@ -75,16 +93,16 @@ class FileDiff {
 
     document.querySelector(Constants.DIFF_BAR_SELECTOR).insertAdjacentHTML('afterBegin', btnGroup);
 
-    document.getElementById(Constants.COLLAPSE_ALL_BUTTON_ID).addEventListener('click', FileDiff.hideAllBodies);
-    document.getElementById(Constants.SHOW_ALL_BUTTON_ID).addEventListener('click', FileDiff.showAllBodies);
+    document.getElementById(Constants.COLLAPSE_ALL_BUTTON_ID).addEventListener('click', this.hideAllBodies);
+    document.getElementById(Constants.SHOW_ALL_BUTTON_ID).addEventListener('click', this.showAllBodies);
   }
 
   /**
    * Hides all the visible diff file bodies
    * @param event
    */
-  static hideAllBodies(event) {
-    event.preventDefault();
+  hideAllBodies(event) {
+    event && event.preventDefault();
 
     document.querySelectorAll(`.${Constants.DETAIL_SHOWN_CLASS}`).forEach(function (item) {
       item.classList.remove(Constants.DETAIL_SHOWN_CLASS);
@@ -98,7 +116,7 @@ class FileDiff {
    * Shows all the hidden diff file bodies
    * @param event
    */
-  static showAllBodies(event) {
+  showAllBodies(event) {
     event.preventDefault();
 
     document.querySelectorAll(`.${Constants.DETAIL_HIDDEN_CLASS}`).forEach(function (item) {
@@ -110,6 +128,10 @@ class FileDiff {
   }
 }
 
-new FileDiff();
+let fileDiff = new FileDiff();
 
-
+// Ugh! Required on page switch because page isn't
+// reloaded and extension is not initialized
+window.setInterval(function () {
+  fileDiff.initialize();
+}, 500);
