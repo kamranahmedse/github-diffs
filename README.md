@@ -1,4 +1,8 @@
-# github-diffs ➕➖
+<p align="center">
+  <img src="http://i.imgur.com/SgwxaDU.png" alt="github-diffs">
+</p>
+
+<h1 align="center">github-diffs ➕➖</h1>
 
 > Collapse or expand diffs in pull requests for easier code review
 
@@ -9,4 +13,9 @@
 
 > Adds buttons to `Collapse all Diffs` or `Show all Diffs` and individual toggle diff options
 
-![](http://i.imgur.com/JDjznPA.png)
+![](http://i.imgur.com/Q0lNwnI.png)
+
+### Installation
+
+- [Install from the Webstore](https://chrome.google.com/webstore/detail/github-diffs/dhcpmhfjmlgjfhpeeloohoffbmpjfmgh)
+- Or [install it manually](http://superuser.com/a/247654/6877)
