@@ -2,9 +2,9 @@
 
 > Collapse or expand diffs in pull requests for easier code review
 
-### Almost there
+### 🏁 Almost there
 > .. going to sleep 💤 check back later ⏰
 
-### Sneak Peak
+### 👀 Sneak Peak
 
 ![](http://i.imgur.com/PENKbhP.png)
