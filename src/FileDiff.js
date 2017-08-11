@@ -8,6 +8,7 @@ class FileDiff {
     FileDiff.addToolBarItems();
     FileDiff.toggleFileDetails = FileDiff.toggleFileDetails.bind(this);
 
+    // Restore the last known state
     if (localStorage.getItem(Constants.STORAGE_KEY) === Constants.STATE_COLLAPSED) {
       FileDiff.hideAllBodies();
     }
@@ -110,4 +111,5 @@ class FileDiff {
 }
 
 new FileDiff();
+
 

@@ -1,5 +1,5 @@
 {
-  "name": "github-collapse",
+  "name": "github-diffs",
   "version": "1.0.0",
   "description": "Collapse/expand diffs in github pull requests for easier review",
   "dependencies": {},
