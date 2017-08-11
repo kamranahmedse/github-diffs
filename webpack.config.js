@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   context: __dirname + '/src',
   entry: {
-    bundle: './FileDiff.js'
+    GithubDiff: './GithubDiff.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),

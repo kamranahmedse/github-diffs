@@ -16,7 +16,7 @@
         "https://github.com/*"
       ],
       "js": [
-        "bundle.js"
+        "GithubDiff.js"
       ]
     }
   ]

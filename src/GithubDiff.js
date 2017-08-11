@@ -1,6 +1,6 @@
 import Constants from "./Constants";
 
-class FileDiff {
+class GithubDiff {
 
   constructor() {
     this.toggleFileDetails = this.toggleFileDetails.bind(this);
@@ -148,10 +148,10 @@ class FileDiff {
   }
 }
 
-let fileDiff = new FileDiff();
+let githubDiff = new GithubDiff();
 
 // Ugh! Required on page switch because page isn't
 // reloaded and extension is not initialized
 window.setInterval(function () {
-  fileDiff.initialize();
+  githubDiff.initialize();
 }, 500);
