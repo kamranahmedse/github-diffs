@@ -1,5 +1,8 @@
 # github-diffs
 
-> Collapse or expand diffs in pull requests for easier code review
+> Chrome extension - Collapse or expand diffs in pull requests for easier code review
 
-![](http://i.imgur.com/1A56c4z.png)
+
+> .. Check back later ⏰
+
+![](http://i.imgur.com/PENKbhP.png)
