@@ -1,8 +1,10 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  context: __dirname + '/src',
   entry: {
-    FileDiff: './src/FileDiff.js'
+    FileDiff: './FileDiff.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -12,12 +14,18 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
           presets: ['es2015']
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      {from: 'manifest.json'},
+      {from: 'icons', to: 'icons'}
+    ])
+  ]
 };
